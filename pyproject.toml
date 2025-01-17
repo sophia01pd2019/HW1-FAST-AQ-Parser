@@ -1,7 +1,7 @@
 [build-system]
 requires = [
 	"flit_core >=3.2,<4",
-	"python_version >= '3.7'"
+	"python_version >= '3.9'"
 	]
 build-backend = "flit_core.buildapi"
 
@@ -18,7 +18,8 @@ license = {file = "LICENSE"}
 classifiers = ["License :: OSI Approved :: MIT License"]
 dynamic = ["version", "description"]
 dependencies = [
-    "pytest"
+    "pytest",
+    "flit_core"
 ]
 
 [project.urls]
