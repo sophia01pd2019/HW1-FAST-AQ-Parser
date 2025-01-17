@@ -1,10 +1,8 @@
 # write tests for parsers
-
+import pytest
 from seqparser import (
         FastaParser,
         FastqParser)
-
-import pytest
 
 
 def test_freebie_parser_1():
@@ -12,7 +10,7 @@ def test_freebie_parser_1():
     This one is a freebie
     DO NOT MODIFY THIS FUNCTION
     """
-    assert True # things after the assert are true statements
+    assert True 
 
 
 def test_freebie_parser_2():
@@ -43,6 +41,12 @@ def test_FastaParser():
         bad_parser = FastaParser("./bad.fa")
         list(bad_parser)
 
+    # valid file
+    fastq_parser = FastqParser("../data/test.fa")  
+    sequences = list(fastq_parser)
+    assert len(sequences) > 0, "FASTA file should yield valid sequences."
+
+
 def test_FastaFormat():
     """
     Test to make sure that a fasta file is being read in if a fastq file is
@@ -50,9 +54,9 @@ def test_FastaFormat():
     """
 
     # Test reading a FASTA file with FastaParser
-    fasta_parser = FastaParser("../data/test.fa")  # Assuming a valid FASTA file with headers
+    fasta_parser = FastaParser("../data/test.fa")  
     first_sequence = next(iter(fasta_parser), None)
-    assert first_sequence is not None, "FASTA file should yield valid sequences when read by FastaParser."
+    assert first_sequence is not None, "FASTA file should yield valid sequences."
 
 
 def test_FastqParser():
@@ -66,16 +70,16 @@ def test_FastqParser():
         empty_parser = FastaParser("./blank.fq")
         list(empty_parser)
 
-    # Test with the valid test file (test.fq)
+    # valid file
     fastq_parser = FastqParser("../data/test.fq")  
     sequences = list(fastq_parser)
-    assert len(sequences) > 0, "Valid FASTQ file should yield sequences."
+    assert len(sequences) > 0, "FASTQ file should yield valid sequences."
 
 def test_FastqFormat():
     """
     Test to make sure fastq file is being read in. If this is a fasta file, the
     first line is None
     """
-    fasta_parser = FastaParser("../data/test.fq")  # Assuming a valid FASTQ file with headers
+    fasta_parser = FastaParser("../data/test.fq")  
     first_sequence = next(iter(fasta_parser), None)
-    assert first_sequence is not None, "FASTQ file should yield valid sequences when read by FastaParser."
+    assert first_sequence is not None, "FASTQ file should yield valid sequences."
