@@ -34,7 +34,7 @@ def test_FastaParser():
     provided in /tests/bad.fa and /tests/empty.fa
     """
     # empty 
-    empty_parser = FastaParser("/tests/empty.fa")
+    empty_parser = FastaParser("/tests/blank.fa")
     empty_sequences = list(empty_parser)
     assert len(empty_sequences) == 0, "Empty Fasta file should return no sequences."
 
@@ -48,7 +48,7 @@ def test_FastaFormat():
     Test to make sure that a fasta file is being read in if a fastq file is
     read, the first item is None
     """
-    fasta_parser = FastaParser("/tests/empty.fa")
+    fasta_parser = FastaParser("/tests/blank.fa")
     first_sequence = next(iter(fasta_parser), None)
     assert first_sequence is None, "Empty Fasta file should not yield valid sequences."
 
@@ -58,7 +58,7 @@ def test_FastqParser():
     an instance of your FastqParser class and assert that it properly reads 
     in the example Fastq File.
     """
-    empty_parser = FastqParser("/tests/empty.fastq")
+    empty_parser = FastqParser("/tests/blank.fastq")
     empty_sequences = list(empty_parser)
     assert len(empty_sequences) == 0, "Empty Fastq file should return no sequences."
 
