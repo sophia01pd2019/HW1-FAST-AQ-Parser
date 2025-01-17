@@ -76,6 +76,6 @@ def test_FastqFormat():
     Test to make sure fastq file is being read in. If this is a fasta file, the
     first line is None
     """
-    fasta_parser = FastaParser("./blank.fq")  # Assuming a valid FASTQ file with headers
+    fasta_parser = FastaParser("../data/test.fq")  # Assuming a valid FASTQ file with headers
     first_sequence = next(iter(fasta_parser), None)
     assert first_sequence is not None, "FASTQ file should yield valid sequences when read by FastaParser."
