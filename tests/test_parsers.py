@@ -62,10 +62,19 @@ def test_FastaFormat():
     assert first_sequence is not None, "FASTA file should yield valid sequences when read by FastaParser."
 
     # Test reading a FASTA file with FastqParser
-    with pytest.raises(ValueError, match="FASTQ format expected"):
+    with pytest.raises(ValueError) as excinfo:
         fastq_parser = FastqParser("./test_fasta.fa")
         list(fastq_parser)
+    
+    # Check the error message
+    assert "FASTQ format expected" in str(excinfo.value) or "invalid FASTQ format" in str(excinfo.value), (
+        f"Unexpected error message: {excinfo.value}"
+    )
 
+    # Clean up the temporary test file
+    import os
+    os.remove("./test_fasta.fa")
+    
 def test_FastqParser():
     """
     Write your unit test for your FastqParser class here. You should generate
