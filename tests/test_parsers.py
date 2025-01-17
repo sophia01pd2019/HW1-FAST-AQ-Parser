@@ -48,15 +48,13 @@ def test_FastaFormat():
     Test to make sure that a fasta file is being read in if a fastq file is
     read, the first item is None
     """
-    # Test with an empty Fasta file
-    fasta_parser = FastaParser("./blank.fa")
-    first_sequence = next(iter(fasta_parser), None)
-    assert first_sequence is None, "Empty Fasta file should not yield valid sequences."
+    with pytest.raises(ValueError, match="0 lines"):
+        fasta_parser = FastaParser("./blank.fa")
+        list(fasta_parser)
 
-    # Test with a corrupted Fasta file
-    with pytest.raises(ValueError):
-        corrupted_parser = FastaParser("./bad.fa")
-        list(corrupted_parser)
+    # Test with a corrupted Fasta file - Expect ValueError
+    with pytest.raises(ValueError, match="corrupted"):
+        FastaParser("./bad.fa")
 
 def test_FastqParser():
     """
@@ -64,25 +62,29 @@ def test_FastqParser():
     an instance of your FastqParser class and assert that it properly reads 
     in the example Fastq File.
     """
-    empty_parser = FastqParser("./blank.fa")
-    empty_sequences = list(empty_parser)
-    assert len(empty_sequences) == 0, "Empty Fastq file should return no sequences."
+    # Test with an empty Fastq file - Expect ValueError
+    with pytest.raises(ValueError, match="0 lines"):
+        fastq_parser = FastqParser("./blank.fa")
+        list(fastq_parser)
 
-    # Test with a corrupted Fastq file
-    with pytest.raises(ValueError):
-        corrupted_parser = FastqParser("./bad.fa")
-        list(corrupted_parser)
+    # Test with a valid Fastq file (if available)
+    # Assuming you have a valid file called `valid.fastq`
+    valid_parser = FastqParser("./valid.fastq")
+    sequences = list(valid_parser)
+    assert len(sequences) > 0, "Valid Fastq file should return sequences."
+
 
 def test_FastqFormat():
     """
     Test to make sure fastq file is being read in. If this is a fasta file, the
     first line is None
     """
-    with pytest.raises(ValueError):
-        fasta_with_fastq_parser = FastqParser("./bad.fa")
-        list(fasta_with_fastq_parser)
+    # Test reading a FASTA file with FastqParser should raise ValueError
+    # Test reading a FASTA file with FastqParser should raise ValueError
+    with pytest.raises(ValueError, match="invalid format"):
+        fastq_parser = FastqParser("./bad.fa")
+        list(fastq_parser)
 
-    # Test reading a blank Fastq file
-    blank_fastq_parser = FastqParser("./blank.fa")
-    first_sequence = next(iter(blank_fastq_parser), None)
-    assert first_sequence is None, "Blank Fastq file should not yield valid sequences."
+    # Test reading a blank Fastq file - Expect ValueError
+    with pytest.raises(ValueError, match="0 lines"):
+        FastqParser("./blank.fa")
