@@ -48,13 +48,22 @@ def test_FastaFormat():
     Test to make sure that a fasta file is being read in if a fastq file is
     read, the first item is None
     """
+    fasta_content = """>Sequence1
+    ATCGATCGATCG
+    >Sequence2
+    GCTAGCTAGCTA
+    """
+    with open("./test_fasta.fa", "w") as fasta_file:
+        fasta_file.write(fasta_content)
+    
     # Test reading a FASTA file with FastaParser
-    fasta_parser = FastaParser("./blank.fa")  # Assuming a valid FASTA file with headers
+    fasta_parser = FastaParser("./test_fasta.fa")  # Assuming a valid FASTA file with headers
     first_sequence = next(iter(fasta_parser), None)
     assert first_sequence is not None, "FASTA file should yield valid sequences when read by FastaParser."
 
+    # Test reading a FASTA file with FastqParser
     with pytest.raises(ValueError, match="FASTQ format expected"):
-        fastq_parser = FastqParser("./blank.fa")
+        fastq_parser = FastqParser("./test_fasta.fa")
         list(fastq_parser)
 
 def test_FastqParser():
