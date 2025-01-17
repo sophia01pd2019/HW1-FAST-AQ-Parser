@@ -58,7 +58,7 @@ def test_FastqParser():
     an instance of your FastqParser class and assert that it properly reads 
     in the example Fastq File.
     """
-    empty_parser = FastqParser("./blank.fastq")
+    empty_parser = FastqParser("./blank.fa")
     empty_sequences = list(empty_parser)
     assert len(empty_sequences) == 0, "Empty Fastq file should return no sequences."
 
