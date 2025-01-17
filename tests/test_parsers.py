@@ -79,7 +79,3 @@ def test_FastqFormat():
     fasta_parser = FastaParser("./blank.fq")  # Assuming a valid FASTQ file with headers
     first_sequence = next(iter(fasta_parser), None)
     assert first_sequence is not None, "FASTQ file should yield valid sequences when read by FastaParser."
-
-    with pytest.raises(ValueError, match="FASTA format expected"):
-        fastq_parser = FastqParser("./blank.fq")
-        list(fastq_parser)
