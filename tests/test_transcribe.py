@@ -47,7 +47,7 @@ def test_reverse_transcribe():
     """
     # valid
     dna_sequence = "GTCA"
-    expected_rna = "CAGU"  
+    expected_rna = "UGAC"  
     assert reverse_transcribe(dna_sequence) == expected_rna, "Reverse transcription failed for a valid DNA sequence."
 
     # empty
@@ -57,4 +57,4 @@ def test_reverse_transcribe():
 
     # invalid
     with pytest.raises(ValueError):
-        reverse_transcribe("XGPT")
+        reverse_transcribe("ATXG")
