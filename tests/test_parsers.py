@@ -33,12 +33,12 @@ def test_FastaParser():
     files that are blank or corrupted in some way. Two example Fasta files are
     provided in /tests/bad.fa and /tests/empty.fa
     """
-    # empty 
-    empty_parser = FastaParser("./blank.fa")
-    empty_sequences = list(empty_parser)
-    assert len(empty_sequences) == 0, "Empty Fasta file should return no sequences."
+    # empty file
+    with pytest.raises(ValueError):
+        empty_parser = FastaParser("./blank.fa")
+        list(empty_parser)
 
-    # corrupted  
+    # corrupted file
     with pytest.raises(ValueError):
         bad_parser = FastaParser("./bad.fa")
         list(bad_parser)
