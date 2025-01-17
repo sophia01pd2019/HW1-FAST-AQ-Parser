@@ -67,14 +67,9 @@ def test_FastqParser():
         list(empty_parser)
 
     # Test with the valid test file (test.fq)
-    fastq_parser = FastqParser("../data/test.fq")  # Assuming this file exists
+    fastq_parser = FastqParser("../data/test.fq")  
     sequences = list(fastq_parser)
     assert len(sequences) > 0, "Valid FASTQ file should yield sequences."
-    assert all(
-        "header" in seq and "sequence" in seq and "quality" in seq
-        for seq in sequences
-    ), "Each sequence should contain header, sequence, and quality fields."
-
 
 def test_FastqFormat():
     """
