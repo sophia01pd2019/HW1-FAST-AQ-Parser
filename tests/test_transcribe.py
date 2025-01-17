@@ -26,35 +26,35 @@ def test_transcribe():
     """
     Write your unit test for the transcribe function here.
     """
-    # Test a valid DNA sequence
-    dna_sequence = "ATCG"
-    expected_rna = "UAGC"
+    # valid
+    dna_sequence = "GTCA"
+    expected_rna = "CAGU"
     assert transcribe(dna_sequence) == expected_rna, "Transcription failed for a valid DNA sequence."
 
-    # Test an empty DNA sequence
+    # empty
     dna_sequence = ""
     expected_rna = ""
     assert transcribe(dna_sequence) == expected_rna, "Transcription failed for an empty DNA sequence."
 
-    # Test invalid characters in DNA sequence
+    # invalid
     with pytest.raises(ValueError):
-        transcribe("ATXG")
+        transcribe("XGPT")
 
 
 def test_reverse_transcribe():
     """
     Write your unit test for the reverse transcribe function here.
     """
-    # Test a valid DNA sequence
-    dna_sequence = "ATCG"
-    expected_rna = "CGAU"  # Reverse of "UAGC"
+    # valid
+    dna_sequence = "GTCA"
+    expected_rna = "CAGO"  
     assert reverse_transcribe(dna_sequence) == expected_rna, "Reverse transcription failed for a valid DNA sequence."
 
-    # Test an empty DNA sequence
+    # empty
     dna_sequence = ""
     expected_rna = ""
     assert reverse_transcribe(dna_sequence) == expected_rna, "Reverse transcription failed for an empty DNA sequence."
 
-    # Test invalid characters in DNA sequence
+    # invalid
     with pytest.raises(ValueError):
-        reverse_transcribe("ATXG")
+        reverse_transcribe("XGPT")
