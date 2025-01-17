@@ -21,4 +21,4 @@ jobs:
         run: |
           pytest -vv tests
 
-          name: Project Tests
+          name: Project Tests 
