@@ -47,7 +47,7 @@ def test_reverse_transcribe():
     """
     # valid
     dna_sequence = "GTCA"
-    expected_rna = "CAGO"  
+    expected_rna = "CAGU"  
     assert reverse_transcribe(dna_sequence) == expected_rna, "Reverse transcription failed for a valid DNA sequence."
 
     # empty
